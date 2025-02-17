@@ -1,0 +1,46 @@
+{
+  "name": "tce-manifest",
+  "description": "Tailor CMS Jodit HTML editor",
+  "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
+  "type": "module",
+  "version": "0.0.1",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "lint": "eslint --ext .js,.ts .",
+    "lint:fix": "pnpm lint --fix"
+  },
+  "devDependencies": {
+    "@tailor-cms/eslint-config": "0.0.2",
+    "tsup": "^8.3.6",
+    "typescript": "^5.7.3"
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "target": [
+      "node14",
+      "es2022"
+    ],
+    "format": [
+      "cjs",
+      "esm"
+    ],
+    "bundle": true,
+    "minify": false,
+    "clean": false,
+    "dts": true
+  }
+}

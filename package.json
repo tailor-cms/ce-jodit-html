@@ -1,0 +1,49 @@
+{
+  "name": "ce-jodit-html",
+  "description": "Tailor CMS Jodit HTML editor",
+  "version": "0.0.1",
+  "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
+  "type": "module",
+  "exports": {
+    "./edit": {
+      "import": "./packages/edit/dist/index.js",
+      "require": "./packages/edit/dist/index.cjs"
+    },
+    "./display": {
+      "import": "./packages/display/dist/index.js",
+      "require": "./packages/display/dist/index.cjs"
+    },
+    "./server": {
+      "import": "./packages/server/dist/index.js",
+      "require": "./packages/server/dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "concurrently 'pnpm boot:cek' 'pnpm boot:display' -n cek,display-runtime -c blue,cyan",
+    "boot:cek": "cd ./node_modules/@tailor-cms/tce-boot && pnpm start",
+    "boot:display": "export TCE_DISPLAY_DIR=${PWD}/packages/display/dist && cd ./node_modules/@tailor-cms/tce-display-runtime && pnpm vite optimize && pnpm dev",
+    "build": "pnpm -r run build",
+    "lint": "pnpm -r run lint",
+    "lint:fix": "pnpm -r run lint --fix",
+    "test": "pnpm playwright test --config ./test/playwright.config.ts"
+  },
+  "bin": {
+    "@tailor-cms/tce-template": "bin/index.cjs"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.12",
+    "@playwright/test": "1.50.1",
+    "@tailor-cms/eslint-config": "0.0.2",
+    "@tailor-cms/tce-boot": "1.0.3",
+    "@tailor-cms/tce-display-runtime": "0.6.11",
+    "@types/node": "^22.13.1",
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
+    "prettier": "3.5.0",
+    "typescript": "^5.7.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "pnpm@9.0.6+sha512.f6d863130973207cb7a336d6b439a242a26ac8068077df530d6a86069419853dc1ffe64029ec594a9c505a3a410d19643c870aba6776330f5cfddcf10a9c1617"
+}
