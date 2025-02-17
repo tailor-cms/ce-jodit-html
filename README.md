@@ -1,7 +1,6 @@
-# tce-template
+# ce-jodit-html
 
-Base template for Tailor Content Element Kit. For more details see
-[docs](https://tailor-cms.github.io/xt/).
+Tailor Jodit HTML editor component.
 
 ## Usage
 

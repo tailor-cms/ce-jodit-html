@@ -1,6 +1,6 @@
 {
-  "name": "tce-server",
-  "description": "Tailor CMS Jodit HTML editor",
+  "name": "@tailor-cms/ce-jodit-html-server",
+  "description": "Tailor CMS Jodit HTML editor server component",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "type": "module",
   "version": "0.0.1",
@@ -22,9 +22,9 @@
     "lint:fix": "pnpm lint --fix"
   },
   "devDependencies": {
+    "@tailor-cms/ce-jodit-html-manifest": "workspace:*",
     "@tailor-cms/cek-common": "^0.0.4",
     "@tailor-cms/eslint-config": "0.0.2",
-    "tce-manifest": "workspace:*",
     "tsup": "^8.3.6",
     "typescript": "^5.7.3"
   },
@@ -44,5 +44,8 @@
     "minify": false,
     "clean": false,
     "dts": true
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

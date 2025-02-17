@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 import { defineEmits, defineProps } from 'vue';
-import { Element } from 'tce-manifest';
+import { Element } from '@tailor-cms/ce-jodit-html-manifest';
 
 const emit = defineEmits(['save']);
 const props = defineProps<{ element: Element; isFocused: boolean }>();

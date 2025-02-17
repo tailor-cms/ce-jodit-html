@@ -1,6 +1,6 @@
 import type { HookServices, ServerRuntime } from '@tailor-cms/cek-common';
-import { initState, mocks, type } from 'tce-manifest';
-import type { Element } from 'tce-manifest';
+import { initState, mocks, type } from '@tailor-cms/ce-jodit-html-manifest';
+import type { Element } from '@tailor-cms/ce-jodit-html-manifest';
 
 // Detect if hooks are running in CEK (used for mocking end-system runtime)
 const IS_CEK = process.env.CEK_RUNTIME;
