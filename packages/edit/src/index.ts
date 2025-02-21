@@ -1,3 +1,4 @@
+import 'jodit/es2021/jodit.fat.min.css';
 import baseManifest from '@tailor-cms/ce-jodit-html-manifest';
 import type { ElementManifest } from '@tailor-cms/ce-jodit-html-manifest';
 
