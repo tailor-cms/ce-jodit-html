@@ -36,7 +36,7 @@ $font-family-secondary: roboto, helvetica, arial, sans-serif;
   .jodit-ui-group {
     .jodit-toolbar-button {
       min-width: 30px;
-      line-height: 100%;
+      line-height: normal;
 
       &:focus {
         outline: none;
@@ -155,11 +155,6 @@ $font-family-secondary: roboto, helvetica, arial, sans-serif;
       display: none;
     }
   }
-
-  // TODO: Remove after bootstrap gets removed!
-  blockquote {
-    border: none;
-  }
 }
 
 .jodit-toolbar-editor-collection_list > .jodit-toolbar-editor-collection {
@@ -224,19 +219,5 @@ $font-family-secondary: roboto, helvetica, arial, sans-serif;
 
 .jodit-toolbar-editor-collection_popup {
   margin-top: 6px;
-}
-
-.jodit-toolbar-button_tooltip {
-  /* stylelint-disable-next-line  */
-  .jodit-toolbar-button__icon {
-    display: block;
-    width: 20px;
-    height: 20px;
-    font-size: 20px;
-  }
-
-  .jodit-toolbar-button__text {
-    display: none;
-  }
 }
 </style>
