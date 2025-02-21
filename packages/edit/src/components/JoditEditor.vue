@@ -45,6 +45,10 @@ onMounted(() => {
       toolbarAdaptive: false,
       language: 'en',
       events: { change: (val: string) => emit('update:modelValue', val) },
+      placeholder: 'Enter your text...',
+      hidePoweredByJodit: true,
+      showXPathInStatusbar: false,
+      disablePlugins: 'add-new-line',
       buttons: [
         'source',
         '|',
@@ -83,6 +87,10 @@ onMounted(() => {
         '|',
         'eraser',
       ],
+      sourceEditorNativeOptions: {
+        mode: 'ace/mode/html',
+        theme: 'ace/theme/chrome',
+      },
       controls: {
         ol: { command: 'insertOrderedList', list: undefined },
         ul: { command: 'insertUnorderedList', list: undefined },
@@ -115,7 +123,7 @@ onMounted(() => {
           update(_editor: Jodit, button: IToolbarButton) {
             const value = button.state.value as string;
             const list = button.control.list as Record<string, string>;
-            button.setState({ text: list[value] });
+            button.setState({ text: list[value] ?? 'Normal' });
           },
           name: '',
         },

@@ -1,5 +1,5 @@
 <template>
-  <div class="tce-jodit-html">
+  <div class="tce-jodit-html text-left">
     <JoditEditor v-if="isFocused" v-model="content" />
     <div v-else class="jodit-container">
       <!-- eslint-disable-next-line vue/no-v-html -->
@@ -65,8 +65,6 @@ $tooltip-color: #37474f;
 }
 
 :deep(.tce-jodit-html) {
-  text-align: initial;
-
   .jodit-container {
     border: none;
   }
