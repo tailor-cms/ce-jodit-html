@@ -8,6 +8,7 @@
 <script lang="ts" setup>
 import 'jodit/esm/plugins/all.js';
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { IToolbarButton } from 'jodit/types';
 import { Jodit } from 'jodit';
 
 import toolbarIcons from './toolbarIcons';
@@ -24,25 +25,26 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits(['update:modelValue']);
 
 const editorRef = ref<HTMLTextAreaElement | null>(null);
-const editorInstance = ref<Jodit | null>(null);
+const editor = ref<Jodit | null>(null);
 
 toolbarIcons();
 
 watch(
   () => props.modelValue,
   (value) => {
-    const editor = editorInstance.value;
-    if (editor && editor.value !== value) editor.value = value;
+    if (!editor.value) return;
+    if (editor.value.value !== value) editor.value.value = value;
   },
 );
 
 onMounted(() => {
   if (editorRef.value) {
-    editorInstance.value = Jodit.make(editorRef.value, {
+    editor.value = Jodit.make(editorRef.value, {
       toolbar: '#joditToolbar',
       autofocus: true,
       toolbarAdaptive: false,
       language: 'en',
+      events: { change: (val: string) => emit('update:modelValue', val) },
       buttons: [
         'source',
         '|',
@@ -81,17 +83,50 @@ onMounted(() => {
         '|',
         'eraser',
       ],
+      controls: {
+        ol: { command: 'insertOrderedList', list: undefined },
+        ul: { command: 'insertUnorderedList', list: undefined },
+        font: {
+          list: Jodit.atom({
+            '': 'Default',
+            'Helvetica, sans-serif': 'Helvetica',
+            'Arial, Helvetica, sans-serif': 'Arial',
+            'Georgia, Palatino, serif': 'Georgia',
+            'Impact, Charcoal, sans-serif': 'Impact',
+            'Tahoma, Geneva, sans-serif': 'Tahoma',
+            '"Times New Roman", Times, serif': 'Times New Roman',
+            'Verdana, Geneva, sans-serif': 'Verdana',
+          }),
+          update(_editor: Jodit, button: IToolbarButton) {
+            const value = button.state.value as string;
+            const list = button.control.list as Record<string, string>;
+            button.setState({ text: list[value] ?? 'Default' });
+          },
+          name: '',
+        },
+        fontsize: {
+          update(_editor: Jodit, button: IToolbarButton) {
+            button.setState({ text: button.state.value as string });
+          },
+          name: '',
+        },
+        paragraph: {
+          list: { p: 'Normal' },
+          update(_editor: Jodit, button: IToolbarButton) {
+            const value = button.state.value as string;
+            const list = button.control.list as Record<string, string>;
+            button.setState({ text: list[value] });
+          },
+          name: '',
+        },
+      },
     });
-    editorInstance.value.value = props.modelValue;
-    editorInstance.value.events.on('change', (val: any) =>
-      emit('update:modelValue', val),
-    );
+    editor.value.value = props.modelValue;
+    editor.value.events.fire('getContainer', editor.value.toolbar.container);
   }
 });
 
-onBeforeUnmount(() => {
-  editorInstance.value?.destruct();
-});
+onBeforeUnmount(() => editor.value?.destruct());
 </script>
 
 <style lang="scss" scoped>
@@ -145,15 +180,6 @@ $font-family-monospace:
 
       & > a {
         vertical-align: middle;
-      }
-
-      .jodit-icon {
-        display: inline-block;
-        width: $icon-size;
-        height: $icon-size;
-        font-size: $icon-size;
-        line-height: $icon-size;
-        color: $icon-color;
       }
     }
   }

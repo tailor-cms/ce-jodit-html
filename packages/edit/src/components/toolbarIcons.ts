@@ -52,10 +52,20 @@ const mdiIcons = {
   pencil: 'pencil',
 };
 
-export default () =>
+export default () => {
   map(mdiIcons, (icon, key) =>
     Jodit.modules.Icon.set(
       key,
       `<i class="mdi-${icon} mdi v-icon notranslate v-theme--default v-icon--size-default"></i>`,
     ),
   );
+  Jodit.modules.Icon.set(
+    'brush',
+    `<span class="icon stack">
+        <span class="icon stacked mdi mdi-format-color-text"></span>
+        <span class="icon stacked mdi mdi-color-helper"></span>
+        <svg width="0" height="0" style="display: none;"></svg>
+      </span>
+    `,
+  );
+};
