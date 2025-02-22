@@ -14,12 +14,16 @@ defineEmits(['save']);
 <style lang="scss">
 $icon-color: #333;
 $icon-accent-color: #ff6590;
-$icon-size: 20px;
+$icon-size: 24px;
 $text-size: 16px;
 $font-family-secondary: roboto, helvetica, arial, sans-serif;
 
 .jodit-toolbar-editor-collection_container {
   min-height: 72px;
+}
+
+#joditToolbar {
+  width: unset !important;
 }
 
 .jodit-toolbar-editor-collection {
@@ -40,6 +44,15 @@ $font-family-secondary: roboto, helvetica, arial, sans-serif;
 
       &:focus {
         outline: none;
+      }
+
+      button {
+        height: 2rem;
+        min-width: 2rem;
+      }
+
+      .jodit-toolbar-button__text {
+        font-size: $text-size;
       }
 
       .jodit-icon {
@@ -219,5 +232,9 @@ $font-family-secondary: roboto, helvetica, arial, sans-serif;
 
 .jodit-toolbar-editor-collection_popup {
   margin-top: 6px;
+}
+
+.jodit-toolbar-button {
+  border-radius: 8px !important;
 }
 </style>

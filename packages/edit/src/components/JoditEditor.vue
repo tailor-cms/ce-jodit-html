@@ -92,6 +92,9 @@ onMounted(() => {
         theme: 'ace/theme/chrome',
       },
       controls: {
+        superscript: { tooltip: 'Superscript' },
+        subscript: { tooltip: 'Subscript' },
+        tooltip: { tooltip: 'Insert Tooltip' },
         ol: { command: 'insertOrderedList', list: undefined },
         ul: { command: 'insertUnorderedList', list: undefined },
         font: {
@@ -125,6 +128,7 @@ onMounted(() => {
             const list = button.control.list as Record<string, string>;
             button.setState({ text: list[value] ?? 'Normal' });
           },
+          tooltip: 'Style',
           name: '',
         },
       },
