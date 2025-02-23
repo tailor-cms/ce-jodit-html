@@ -29,10 +29,10 @@ export const formTemplate = (jodit: IJodit) => {
     ref: 'content_input',
     label: 'Text',
   });
-  const unlinkBtn = new UIButton(jodit, {
-    name: 'unlink',
+  const deleteBtn = new UIButton(jodit, {
+    name: 'delete',
     variant: 'default',
-    text: 'Unlink',
+    text: 'Delete',
   });
   const insertBtn = new UIButton(jodit, {
     name: 'insert',
@@ -43,7 +43,7 @@ export const formTemplate = (jodit: IJodit) => {
   return new UIForm(jodit, [
     new UIBlock(jodit, [tooltipInput]),
     new UIBlock(jodit, [contentInput], { ref: 'content_input_box' }),
-    new UIBlock(jodit, [unlinkBtn, insertBtn], { align: 'full' }),
+    new UIBlock(jodit, [deleteBtn, insertBtn], { align: 'full' }),
   ]);
 };
 
@@ -72,7 +72,6 @@ export class TooltipPlugin extends Plugin {
     const { Dom, Helpers } = Jodit.modules;
     const form = formTemplate(this.jodit);
     const elements = Helpers.refs(form);
-    const { unlink } = elements;
     const contentInput = elements.content_input as HTMLInputElement;
     const tooltipInput = elements.tooltip_input as HTMLInputElement;
     contentInput.value = current?.textContent || '';
@@ -80,25 +79,27 @@ export class TooltipPlugin extends Plugin {
     if (tooltip) {
       const tooltipValue = tooltip.getAttribute(TOOLTIP_ATTR) || '';
       tooltipInput.value = tooltipValue;
+      elements.insert.textContent = 'Update';
     } else {
-      Dom.hide(unlink);
+      Dom.hide(elements.delete);
     }
 
     this.jodit.editor.normalize();
     const snapshot = this.jodit.history.snapshot.make();
-    if (unlink) {
-      this.jodit.events.on(unlink, 'click', (event: Event) => {
-        this.jodit.selection.restore();
+    if (elements.delete) {
+      this.jodit.events.on(elements.delete, 'click', (event: Event) => {
+        event.preventDefault();
         this.jodit.history.snapshot.restore(snapshot);
         if (tooltip) Dom.unwrap(tooltip);
+        this.jodit.selection.restore();
         this.jodit.synchronizeValues();
-        event.preventDefault();
         close();
       });
     }
 
     const attachTooltip = () => {
       this.jodit.selection.restore();
+      this.jodit.selection.removeMarkers();
       this.jodit.editor.normalize();
       this.jodit.history.snapshot.restore(snapshot);
       const tooltipEl = tooltip || document.createElement(TOOLTIP_TAG);
