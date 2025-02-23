@@ -8,20 +8,18 @@
 <script lang="ts" setup>
 import 'jodit/esm/plugins/all.js';
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { IToolbarButton } from 'jodit/types';
 import { Jodit } from 'jodit';
 
 import './plugins/index.ts';
+import { editorConfig } from './config.ts';
+import { toolbarButtons } from './buttons.ts';
 import toolbarIcons from './toolbarIcons';
 
 interface Props {
   modelValue: string;
-  config?: Record<string, any>;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  config: () => ({}),
-});
+const props = defineProps<Props>();
 
 const emit = defineEmits(['update:modelValue']);
 
@@ -41,97 +39,12 @@ watch(
 onMounted(() => {
   if (editorRef.value) {
     editor.value = Jodit.make(editorRef.value, {
+      ...editorConfig,
       toolbar: '#joditToolbar',
-      autofocus: true,
-      toolbarAdaptive: false,
       language: 'en',
-      events: { change: (val: string) => emit('update:modelValue', val) },
       placeholder: 'Enter your text...',
-      hidePoweredByJodit: true,
-      showXPathInStatusbar: false,
-      disablePlugins: 'add-new-line',
-      buttons: [
-        'source',
-        '|',
-        'undo',
-        'redo',
-        'cut',
-        'copyformat',
-        '|',
-        'paragraph',
-        'font',
-        'fontsize',
-        '|',
-        'bold',
-        'italic',
-        'underline',
-        'strikethrough',
-        '|',
-        'brush',
-        '|',
-        'link',
-        'table',
-        'image',
-        'tooltip',
-        'symbols',
-        'hr',
-        '|',
-        'ol',
-        'ul',
-        'outdent',
-        'indent',
-        '|',
-        'align',
-        '|',
-        'subscript',
-        'superscript',
-        '|',
-        'eraser',
-      ],
-      sourceEditorNativeOptions: {
-        mode: 'ace/mode/html',
-        theme: 'ace/theme/chrome',
-      },
-      controls: {
-        superscript: { tooltip: 'Superscript' },
-        subscript: { tooltip: 'Subscript' },
-        ol: { command: 'insertOrderedList', list: undefined },
-        ul: { command: 'insertUnorderedList', list: undefined },
-        font: {
-          list: Jodit.atom({
-            '': 'Default',
-            'Helvetica, sans-serif': 'Helvetica',
-            'Arial, Helvetica, sans-serif': 'Arial',
-            'Georgia, Palatino, serif': 'Georgia',
-            'Impact, Charcoal, sans-serif': 'Impact',
-            'Tahoma, Geneva, sans-serif': 'Tahoma',
-            '"Times New Roman", Times, serif': 'Times New Roman',
-            'Verdana, Geneva, sans-serif': 'Verdana',
-          }),
-          update(_editor: Jodit, button: IToolbarButton) {
-            const value = button.state.value as string;
-            const list = button.control.list as Record<string, string>;
-            button.setState({ text: list[value] ?? 'Default' });
-          },
-          name: '',
-        },
-        fontsize: {
-          update(_editor: Jodit, button: IToolbarButton) {
-            button.setState({ text: button.state.value as string });
-          },
-          name: '',
-        },
-        paragraph: {
-          list: { p: 'Normal' },
-          update(_editor: Jodit, button: IToolbarButton) {
-            const value = button.state.value as string;
-            const list = button.control.list as Record<string, string>;
-            button.setState({ text: list[value] ?? 'Normal' });
-          },
-          tooltip: 'Style',
-          name: '',
-        },
-      },
+      buttons: toolbarButtons,
+      events: { change: (val: string) => emit('update:modelValue', val) },
     });
     editor.value.value = props.modelValue;
     editor.value.events.fire('getContainer', editor.value.toolbar.container);
