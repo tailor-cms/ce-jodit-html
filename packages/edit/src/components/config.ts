@@ -5,8 +5,6 @@ export const editorConfig = {
   autofocus: true,
   toolbarAdaptive: false,
   hidePoweredByJodit: true,
-  showXPathInStatusbar: false,
-  disablePlugins: 'add-new-line',
   sourceEditorNativeOptions: {
     mode: 'ace/mode/html',
     theme: 'ace/theme/chrome',
