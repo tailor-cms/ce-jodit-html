@@ -2,7 +2,7 @@ import { IJodit, Nullable } from 'jodit/esm/types';
 import { UIBlock, UIForm, UIInput } from 'jodit/esm/core/ui/form';
 import isFunction from 'lodash/isFunction';
 import { Jodit } from 'jodit';
-import { Plugin } from 'jodit/types/modules';
+import { Plugin } from 'jodit/esm/modules';
 import { UIButton } from 'jodit/esm/core/ui/button';
 
 const TOOLTIP_CONTROL = 'tooltip';
@@ -10,6 +10,7 @@ const TOOLTIP_TAG = 'span';
 const TOOLTIP_ATTR = 'data-tooltip';
 const TOOLTIP_CLASS = 'tce-jodit-tooltip';
 
+const isHtmlElement = (el: any) => el && el instanceof HTMLElement;
 const isTooltipNode = (node: any) => {
   if (!node || !isFunction(node.hasAttribute)) return false;
   return node.hasAttribute(TOOLTIP_ATTR);
@@ -46,22 +47,25 @@ export const formTemplate = (jodit: IJodit) => {
   ]);
 };
 
-export class TooltipPlugin extends Plugin<IJodit> {
+export class TooltipPlugin extends Plugin {
   jodit: IJodit;
 
   constructor(jodit: IJodit) {
     super(jodit);
     this.jodit = jodit;
+    this.buttons = [{ name: TOOLTIP_CONTROL, group: 'insert' }];
   }
 
-  beforeDestruct() {}
+  afterInit(jodit: IJodit) {
+    jodit.events.on('generateTooltipForm', (current, close) =>
+      this.createTooltipPopup(current, close),
+    );
+  }
 
-  afterInit() {
-    Jodit.defaultOptions.controls.tooltip = {
-      name: TOOLTIP_CONTROL,
-      tooltip: 'Insert Tooltip',
-      popup: (_, current, close) => this.createTooltipPopup(current, close),
-    };
+  beforeDestruct(jodit: IJodit) {
+    jodit.events.off('generateTooltipForm', (current, close) =>
+      this.createTooltipPopup(current, close),
+    );
   }
 
   createTooltipPopup(current: Nullable<Node>, close: () => void) {
@@ -121,3 +125,37 @@ export class TooltipPlugin extends Plugin<IJodit> {
     return form;
   }
 }
+
+Jodit.defaultOptions.controls.tooltip = {
+  isActive: (jodit) => {
+    const { Dom } = Jodit.modules;
+    const editor = (jodit as IJodit).editor;
+    const selection = (jodit as IJodit).selection;
+    if (!selection.isFocused()) return false;
+    let start = selection.sel?.anchorNode as Nullable<Node>;
+    if (start && start.nodeType !== Node.ELEMENT_NODE) {
+      start = start.parentElement;
+    }
+    const condition = (el: Nullable<Node>) =>
+      isHtmlElement(el) && (el as HTMLElement).matches(`.${TOOLTIP_CLASS}`);
+    return !!Dom.up(start, condition, editor);
+  },
+  isDisabled: (jodit) => {
+    const { Dom } = Jodit.modules;
+    const editor = (jodit as IJodit).editor;
+    const selection = (jodit as IJodit).selection;
+    if (!selection.isFocused()) return false;
+    let start = selection.sel?.anchorNode as Nullable<Node>;
+    if (start && start.nodeType !== Node.ELEMENT_NODE) {
+      start = start.parentElement;
+    }
+    const condition = (el: Nullable<Node>) =>
+      isHtmlElement(el) && (el as HTMLElement).matches('table');
+    return !!Dom.up(start, condition, editor);
+  },
+  popup: (editor, current, close) => {
+    return editor.events.fire('generateTooltipForm', current, close);
+  },
+  tooltip: 'Insert Tooltip',
+};
+Jodit.plugins.add('tooltip', TooltipPlugin);

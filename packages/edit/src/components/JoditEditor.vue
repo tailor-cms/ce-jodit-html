@@ -11,6 +11,7 @@ import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { IToolbarButton } from 'jodit/types';
 import { Jodit } from 'jodit';
 
+import './plugins/index.ts';
 import toolbarIcons from './toolbarIcons';
 
 interface Props {
@@ -94,7 +95,6 @@ onMounted(() => {
       controls: {
         superscript: { tooltip: 'Superscript' },
         subscript: { tooltip: 'Subscript' },
-        tooltip: { tooltip: 'Insert Tooltip' },
         ol: { command: 'insertOrderedList', list: undefined },
         ul: { command: 'insertUnorderedList', list: undefined },
         font: {
