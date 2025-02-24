@@ -43,7 +43,6 @@ onMounted(() => {
       toolbarAdaptive: false,
       language: 'en',
       placeholder: 'Enter your text...',
-      addNewLineOnDBLClick: false,
       showTooltipDelay: 350,
       colorPickerDefaultTab: 'color',
       disablePlugins: ['fullsize'],
@@ -58,16 +57,10 @@ onBeforeUnmount(() => editor.value?.destruct());
 </script>
 
 <style lang="scss" scoped>
-$icon-color: #333;
-$icon-size: 18px;
-$statusbar-height: 26px;
-$statusbar-border-size: 1px;
-$min-height: 140px;
-
 :deep(.jodit-container):not(.jodit_inline) {
   display: flex;
   border: none;
-  min-height: $min-height;
+  min-height: 140px;
   flex-direction: column;
 
   .jodit-workplace {
@@ -85,10 +78,8 @@ $min-height: 140px;
 
 :deep(.jodit-status-bar) {
   margin-top: auto;
-  border: none;
-  height: $statusbar-height;
+  border: none !important;
   background-color: transparent;
-  line-height: $statusbar-height - $statusbar-border-size;
 
   .jodit-status-bar__item {
     line-height: inherit;
@@ -97,19 +88,6 @@ $min-height: 140px;
   .jodit-toolbar-button {
     line-height: inherit;
     vertical-align: top;
-
-    & > a {
-      vertical-align: middle;
-    }
-
-    .jodit-icon {
-      display: inline-block;
-      width: $icon-size;
-      height: $icon-size;
-      font-size: $icon-size;
-      line-height: $icon-size;
-      color: $icon-color;
-    }
   }
 }
 </style>

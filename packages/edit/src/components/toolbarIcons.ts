@@ -54,6 +54,18 @@ const mdiIcons = {
 
 export default () => {
   map(mdiIcons, (icon, key) =>
-    Jodit.modules.Icon.set(key, `<i class="mdi-${icon} mdi"></i>`),
+    Jodit.modules.Icon.set(
+      key,
+      `<i class="mdi-${icon} mdi v-icon v-icon--size-default"></i>`,
+    ),
+  );
+  Jodit.modules.Icon.set(
+    'brush',
+    `<span class="icon stack">
+        <span class="icon stacked mdi mdi-format-color-text"></span>
+        <span class="icon stacked mdi mdi-color-helper"></span>
+        <svg width="0" height="0" style="display: none;"></svg>
+      </span>
+    `,
   );
 };

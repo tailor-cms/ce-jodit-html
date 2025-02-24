@@ -56,7 +56,6 @@ $text-size: 16px;
         height: $icon-size;
         font-size: $icon-size;
         line-height: $icon-size;
-        color: $icon-color;
         vertical-align: top;
 
         &.stack {
@@ -78,16 +77,24 @@ $text-size: 16px;
 }
 
 .jodit-toolbar-editor-collection .jodit-toolbar-button {
+  .jodit-icon {
+    color: inherit !important;
+
+    .mdi {
+      color: $icon-color;
+    }
+
+    .mdi-color-helper {
+      color: inherit !important;
+    }
+  }
+
   @mixin colorize($color, $background: none) {
     background: $background;
     color: $color;
 
     & > button {
       background: transparent;
-      color: inherit;
-    }
-
-    .jodit-icon {
       color: inherit;
     }
 
