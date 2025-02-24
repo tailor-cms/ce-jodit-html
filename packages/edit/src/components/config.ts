@@ -1,5 +1,3 @@
-import { css, dataBind } from 'jodit/esm/core/helpers';
-import { IJodit, IToolbarButton } from 'jodit/types';
 import { Jodit } from 'jodit';
 
 export const toolbarId = 'joditToolbar';
