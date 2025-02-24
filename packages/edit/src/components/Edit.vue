@@ -1,17 +1,30 @@
 <template>
   <div class="tce-jodit-html text-left">
-    <JoditEditor v-if="isFocused" v-model="content" />
-    <div v-else class="jodit-container">
-      <!-- eslint-disable-next-line vue/no-v-html -->
-      <div class="jodit-wysiwyg" v-html="content"></div>
-    </div>
+    <ElementPlaceholder
+      v-if="!isFocused && !content && showPlaceholder"
+      :is-disabled="isDisabled"
+      :is-focused="isFocused"
+      :name="`${manifest.name} component`"
+      active-icon="mdi-arrow-up"
+      active-placeholder="Use toolbar to upload the image"
+      icon="mdi-image-plus"
+    />
+    <template v-else>
+      <JoditEditor v-if="isFocused" v-model="content" />
+      <div v-else class="jodit-container">
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div class="jodit-wysiwyg" v-html="content"></div>
+      </div>
+    </template>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, defineProps, ref, watch } from 'vue';
 import debounce from 'lodash/debounce';
-import { Element } from '@tailor-cms/ce-jodit-html-manifest';
+import type { Element } from '@tailor-cms/ce-jodit-html-manifest';
+import { ElementPlaceholder } from '@tailor-cms/core-components';
+import manifest from '@tailor-cms/ce-jodit-html-manifest';
 
 import JoditEditor from './JoditEditor.vue';
 
@@ -20,12 +33,14 @@ interface Props {
   isFocused?: boolean;
   isDisabled?: boolean;
   isDragged?: boolean;
+  showPlaceholder?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   isFocused: false,
   isDisabled: false,
   isDragged: false,
+  showPlaceholder: true,
 });
 const emit = defineEmits(['save']);
 
