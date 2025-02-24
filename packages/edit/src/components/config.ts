@@ -1,10 +1,51 @@
-import { IToolbarButton } from 'jodit/types';
+import { css, dataBind } from 'jodit/esm/core/helpers';
+import { IJodit, IToolbarButton } from 'jodit/types';
 import { Jodit } from 'jodit';
 
+export const toolbarId = 'joditToolbar';
+
+export const toolbarButtons = [
+  'source',
+  '|',
+  'undo',
+  'redo',
+  'cut',
+  'copyformat',
+  '|',
+  'paragraph',
+  'font',
+  'fontsize',
+  '|',
+  'bold',
+  'italic',
+  'underline',
+  'strikethrough',
+  '|',
+  'brush',
+  '|',
+  'link',
+  'table',
+  'image',
+  'tooltip',
+  'symbols',
+  'hr',
+  '|',
+  'ol',
+  'ul',
+  'outdent',
+  'indent',
+  '|',
+  'align',
+  '|',
+  'subscript',
+  'superscript',
+  '|',
+  'eraser',
+];
+
 export const editorConfig = {
-  autofocus: true,
-  toolbarAdaptive: false,
-  hidePoweredByJodit: true,
+  toolbar: `#${toolbarId}`,
+  buttons: toolbarButtons,
   sourceEditorNativeOptions: {
     mode: 'ace/mode/html',
     theme: 'ace/theme/chrome',
@@ -14,8 +55,6 @@ export const editorConfig = {
   controls: {
     superscript: { tooltip: 'Superscript' },
     subscript: { tooltip: 'Subscript' },
-    ol: { command: 'insertOrderedList', list: undefined },
-    ul: { command: 'insertUnorderedList', list: undefined },
     font: {
       list: Jodit.atom({
         '': 'Default',
@@ -27,28 +66,10 @@ export const editorConfig = {
         '"Times New Roman", Times, serif': 'Times New Roman',
         'Verdana, Geneva, sans-serif': 'Verdana',
       }),
-      update(_editor: Jodit, button: IToolbarButton) {
-        const value = button.state.value as string;
-        const list = button.control.list as Record<string, string>;
-        button.setState({ text: list[value] ?? 'Default' });
-      },
-      name: '',
-    },
-    fontsize: {
-      update(_editor: Jodit, button: IToolbarButton) {
-        button.setState({ text: button.state.value as string });
-      },
-      name: '',
     },
     paragraph: {
       list: { p: 'Normal' },
-      update(_editor: Jodit, button: IToolbarButton) {
-        const value = button.state.value as string;
-        const list = button.control.list as Record<string, string>;
-        button.setState({ text: list[value] ?? 'Normal' });
-      },
       tooltip: 'Style',
-      name: '',
     },
   },
 };

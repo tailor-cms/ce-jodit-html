@@ -56,8 +56,6 @@ watch(
 $min-width: 11.25rem;
 $min-height: 8.75rem;
 $min-height-sm: 5.5rem;
-$border-size: 6px;
-$tooltip-color: #37474f;
 
 .jodit-container {
   min-width: $min-width;
@@ -76,54 +74,6 @@ $tooltip-color: #37474f;
 
   .jodit-wysiwyg {
     overflow-wrap: break-word;
-  }
-
-  .tce-jodit-tooltip {
-    position: relative;
-    display: inline-block;
-    background: rgb(205 215 220 / 70%);
-    text-decoration: underline dotted $tooltip-color;
-    cursor: help;
-
-    &::before {
-      content: '';
-      position: absolute;
-      bottom: 100%;
-      border-left: $border-size solid transparent;
-      border-right: $border-size solid transparent;
-      border-top: $border-size solid $tooltip-color;
-    }
-
-    &::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: calc(100% + #{$border-size} - 1px);
-      left: -0.625rem;
-      border-radius: 2px;
-      min-width: 9.375rem;
-      max-width: 18.75rem;
-      padding: 0.375rem;
-      background: $tooltip-color;
-      font-size: 0.9em;
-      text-align: center;
-      color: #fff;
-    }
-
-    &::before,
-    &::after {
-      visibility: hidden;
-      opacity: 0;
-      transition:
-        opacity 0.1s ease-out,
-        margin 0.1s ease-out;
-    }
-
-    &:hover::after,
-    &:hover::before {
-      visibility: visible;
-      opacity: 1;
-      margin-bottom: 0.25rem;
-    }
   }
 }
 

@@ -12,7 +12,6 @@ import { Jodit } from 'jodit';
 
 import './plugins/index.ts';
 import { editorConfig } from './config.ts';
-import { toolbarButtons } from './buttons.ts';
 import toolbarIcons from './toolbarIcons';
 
 interface Props {
@@ -40,10 +39,14 @@ onMounted(() => {
   if (editorRef.value) {
     editor.value = Jodit.make(editorRef.value, {
       ...editorConfig,
-      toolbar: '#joditToolbar',
+      autofocus: true,
+      toolbarAdaptive: false,
       language: 'en',
       placeholder: 'Enter your text...',
-      buttons: toolbarButtons,
+      addNewLineOnDBLClick: false,
+      showTooltipDelay: 350,
+      colorPickerDefaultTab: 'color',
+      disablePlugins: ['fullsize'],
       events: { change: (val: string) => emit('update:modelValue', val) },
     });
     editor.value.value = props.modelValue;
@@ -55,19 +58,73 @@ onBeforeUnmount(() => editor.value?.destruct());
 </script>
 
 <style lang="scss" scoped>
-$icon-color: #333;
-$icon-size: 18px;
-$statusbar-height: 26px;
-$statusbar-border-size: 1px;
-$min-height: 140px;
-$font-family-monospace:
-  'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
-
 .jodit-wrapper {
+  :deep(.jodit-container) {
+    border: none;
+  }
+
+  :deep(.jodit-workplace) {
+    overflow: visible;
+  }
+
+  :deep(.jodit-wysiwyg) {
+    overflow: visible;
+    overflow-wrap: break-word;
+  }
+
+  :deep(.tce-jodit-tooltip) {
+    $tooltip-color: #37474f;
+    $border-size: 6px;
+
+    position: relative;
+    display: inline-block;
+    background: rgb(205 215 220 / 70%);
+    text-decoration: underline dotted $tooltip-color;
+    cursor: help;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      border-left: $border-size solid transparent;
+      border-right: $border-size solid transparent;
+      border-top: $border-size solid $tooltip-color;
+    }
+
+    &::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + #{$border-size} - 1px);
+      left: -0.625rem;
+      border-radius: 4px;
+      max-width: 18.75rem;
+      padding: 0.25rem 0.675rem;
+      background: $tooltip-color;
+      font-size: 0.875rem;
+      color: #fff;
+    }
+
+    &::before,
+    &::after {
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        opacity 0.1s ease-out,
+        margin 0.1s ease-out;
+    }
+
+    &:hover::after,
+    &:hover::before {
+      visibility: visible;
+      opacity: 1;
+      margin-bottom: 0.25rem;
+    }
+  }
+
   :deep(.jodit-container):not(.jodit_inline) {
     display: flex;
     border: none;
-    min-height: $min-height;
+    min-height: 8.75rem;
     flex-direction: column;
 
     .jodit-workplace {
@@ -81,32 +138,12 @@ $font-family-monospace:
 
   :deep(.jodit-source) {
     background: transparent;
-
-    .ace-editor {
-      font-size: 13px;
-      font-family: $font-family-monospace;
-    }
   }
 
   :deep(.jodit-status-bar) {
     margin-top: auto;
     border: none;
-    height: $statusbar-height;
     background-color: transparent;
-    line-height: $statusbar-height - $statusbar-border-size;
-
-    .jodit-status-bar__item {
-      line-height: inherit;
-    }
-
-    .jodit-toolbar-button {
-      line-height: inherit;
-      vertical-align: top;
-
-      & > a {
-        vertical-align: middle;
-      }
-    }
   }
 }
 </style>

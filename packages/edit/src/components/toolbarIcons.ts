@@ -54,10 +54,7 @@ const mdiIcons = {
 
 export default () => {
   map(mdiIcons, (icon, key) =>
-    Jodit.modules.Icon.set(
-      key,
-      `<i class="mdi-${icon} mdi v-icon notranslate v-theme--default v-icon--size-default"></i>`,
-    ),
+    Jodit.modules.Icon.set(key, `<i class="mdi-${icon} mdi"></i>`),
   );
   Jodit.modules.Icon.set(
     'brush',

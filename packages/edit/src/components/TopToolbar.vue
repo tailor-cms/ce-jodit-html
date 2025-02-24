@@ -1,22 +1,18 @@
 <template>
-  <div id="joditToolbar"></div>
+  <div :id="toolbarId"></div>
 </template>
 
-<script setup lang="ts">
-import { defineEmits, defineProps } from 'vue';
-
-defineProps<{ element: Element }>();
-defineEmits(['save']);
+<script lang="ts" setup>
+import { toolbarId } from './config.ts';
 </script>
 
 <style scoped></style>
 
 <style lang="scss">
 $icon-color: #333;
-$icon-accent-color: #ff6590;
+$icon-accent-color: #607d8b;
 $icon-size: 24px;
 $text-size: 16px;
-$font-family-secondary: roboto, helvetica, arial, sans-serif;
 
 .jodit-toolbar-editor-collection_container {
   min-height: 72px;
@@ -34,7 +30,6 @@ $font-family-secondary: roboto, helvetica, arial, sans-serif;
   background: none !important;
   font-size: $text-size;
   line-height: $text-size;
-  font-family: $font-family-secondary;
   text-align: initial;
 
   .jodit-ui-group {
@@ -82,14 +77,13 @@ $font-family-secondary: roboto, helvetica, arial, sans-serif;
   }
 }
 
-/* stylelint-disable-next-line  */
 .jodit-toolbar-editor-collection .jodit-toolbar-button {
   @mixin colorize($color, $background: none) {
     background: $background;
     color: $color;
 
     & > button {
-      background: inherit;
+      background: transparent;
       color: inherit;
     }
 
@@ -120,20 +114,23 @@ $font-family-secondary: roboto, helvetica, arial, sans-serif;
       }
     }
   }
-  /* stylelint-disable-next-line  */
+
   &:active {
     &:not([disabled]) {
       @include colorize(
         $color: $icon-accent-color,
-        $background: lighten($icon-accent-color, 25%)
+        $background: rgba($icon-accent-color, 0.12)
       );
     }
   }
-  /* stylelint-disable-next-line  */
+
   &:hover {
     &:not([disabled]) {
       background-color: transparent;
-      @include colorize($color: $icon-accent-color);
+      @include colorize(
+        $color: $icon-color,
+        $background: rgba($icon-color, 0.08)
+      );
     }
   }
 
@@ -141,7 +138,7 @@ $font-family-secondary: roboto, helvetica, arial, sans-serif;
     &:not([disabled]) {
       @include colorize(
         $color: $icon-accent-color,
-        $background: lighten($icon-accent-color, 25%)
+        $background: rgba($icon-accent-color, 0.12)
       );
     }
   }
