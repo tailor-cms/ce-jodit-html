@@ -58,92 +58,58 @@ onBeforeUnmount(() => editor.value?.destruct());
 </script>
 
 <style lang="scss" scoped>
-.jodit-wrapper {
-  :deep(.jodit-container) {
+$icon-color: #333;
+$icon-size: 18px;
+$statusbar-height: 26px;
+$statusbar-border-size: 1px;
+$min-height: 140px;
+
+:deep(.jodit-container):not(.jodit_inline) {
+  display: flex;
+  border: none;
+  min-height: $min-height;
+  flex-direction: column;
+
+  .jodit-workplace {
     border: none;
   }
+}
 
-  :deep(.jodit-workplace) {
-    overflow: visible;
+:deep(.jodit-placeholder) {
+  font-style: italic;
+}
+
+:deep(.jodit-source) {
+  background: transparent;
+}
+
+:deep(.jodit-status-bar) {
+  margin-top: auto;
+  border: none;
+  height: $statusbar-height;
+  background-color: transparent;
+  line-height: $statusbar-height - $statusbar-border-size;
+
+  .jodit-status-bar__item {
+    line-height: inherit;
   }
 
-  :deep(.jodit-wysiwyg) {
-    overflow: visible;
-    overflow-wrap: break-word;
-  }
+  .jodit-toolbar-button {
+    line-height: inherit;
+    vertical-align: top;
 
-  :deep(.tce-jodit-tooltip) {
-    $tooltip-color: #37474f;
-    $border-size: 6px;
-
-    position: relative;
-    display: inline-block;
-    background: rgb(205 215 220 / 70%);
-    text-decoration: underline dotted $tooltip-color;
-    cursor: help;
-
-    &::before {
-      content: '';
-      position: absolute;
-      bottom: 100%;
-      border-left: $border-size solid transparent;
-      border-right: $border-size solid transparent;
-      border-top: $border-size solid $tooltip-color;
+    & > a {
+      vertical-align: middle;
     }
 
-    &::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: calc(100% + #{$border-size} - 1px);
-      left: -0.625rem;
-      border-radius: 4px;
-      max-width: 18.75rem;
-      padding: 0.25rem 0.675rem;
-      background: $tooltip-color;
-      font-size: 0.875rem;
-      color: #fff;
+    .jodit-icon {
+      display: inline-block;
+      width: $icon-size;
+      height: $icon-size;
+      font-size: $icon-size;
+      line-height: $icon-size;
+      color: $icon-color;
     }
-
-    &::before,
-    &::after {
-      visibility: hidden;
-      opacity: 0;
-      transition:
-        opacity 0.1s ease-out,
-        margin 0.1s ease-out;
-    }
-
-    &:hover::after,
-    &:hover::before {
-      visibility: visible;
-      opacity: 1;
-      margin-bottom: 0.25rem;
-    }
-  }
-
-  :deep(.jodit-container):not(.jodit_inline) {
-    display: flex;
-    border: none;
-    min-height: 8.75rem;
-    flex-direction: column;
-
-    .jodit-workplace {
-      border: none;
-    }
-  }
-
-  :deep(.jodit-placeholder) {
-    font-style: italic;
-  }
-
-  :deep(.jodit-source) {
-    background: transparent;
-  }
-
-  :deep(.jodit-status-bar) {
-    margin-top: auto;
-    border: none;
-    background-color: transparent;
   }
 }
 </style>
