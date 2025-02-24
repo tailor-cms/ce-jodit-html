@@ -20,13 +20,12 @@ export const formTemplate = (jodit: IJodit) => {
   const tooltipInput = new UIInput(jodit, {
     name: 'tooltip',
     type: 'text',
-    ref: 'tooltip_input',
     label: 'Tooltip',
     required: true,
   });
   const contentInput = new UIInput(jodit, {
-    name: 'content',
-    ref: 'content_input',
+    name: 'text',
+    type: 'text',
     label: 'Text',
   });
   const deleteBtn = new UIButton(jodit, {
@@ -42,7 +41,7 @@ export const formTemplate = (jodit: IJodit) => {
   });
   return new UIForm(jodit, [
     new UIBlock(jodit, [tooltipInput]),
-    new UIBlock(jodit, [contentInput], { ref: 'content_input_box' }),
+    new UIBlock(jodit, [contentInput]),
     new UIBlock(jodit, [deleteBtn, insertBtn], { align: 'full' }),
   ]);
 };
@@ -60,6 +59,18 @@ export class TooltipPlugin extends Plugin {
     jodit.events.on('generateTooltipForm', (current, close) =>
       this.createTooltipPopup(current, close),
     );
+
+    jodit.events.on('keydown.enter', (event) => {
+      let node = jodit.selection.sel?.anchorNode as HTMLElement;
+      if (node && node.nodeType !== Node.ELEMENT_NODE) {
+        node = node.parentElement as HTMLElement;
+      }
+      const tooltipNode = node.closest(`.${TOOLTIP_CLASS}`);
+      if (tooltipNode) {
+        event.preventDefault();
+        if (tooltipNode) jodit.selection.setCursorAfter(tooltipNode);
+      }
+    });
   }
 
   beforeDestruct(jodit: IJodit) {
@@ -72,8 +83,8 @@ export class TooltipPlugin extends Plugin {
     const { Dom, Helpers } = Jodit.modules;
     const form = formTemplate(this.jodit);
     const elements = Helpers.refs(form);
-    const contentInput = elements.content_input as HTMLInputElement;
-    const tooltipInput = elements.tooltip_input as HTMLInputElement;
+    const contentInput = elements.text as HTMLInputElement;
+    const tooltipInput = elements.tooltip as HTMLInputElement;
     contentInput.value = current?.textContent || '';
     const tooltip = Dom.up(current, isTooltipNode, this.jodit.editor);
     if (tooltip) {
@@ -109,7 +120,9 @@ export class TooltipPlugin extends Plugin {
       tooltipEl.classList.add(TOOLTIP_CLASS);
       tooltipEl.innerText = innerText;
       if (!tooltip && innerText) this.jodit.selection.insertNode(tooltipEl);
+      this.jodit.selection.setCursorAfter(tooltipEl);
       this.jodit.synchronizeValues();
+      this.jodit.setEditorValue();
       close();
     };
 
