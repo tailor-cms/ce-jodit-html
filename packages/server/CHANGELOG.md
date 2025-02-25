@@ -1,5 +1,11 @@
 # @tailor-cms/ce-jodit-html-server
 
+## 0.0.3
+
+### Patch Changes
+
+- Cleaned up element placeholder.
+
 ## 0.0.2
 
 ### Patch Changes

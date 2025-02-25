@@ -3,7 +3,7 @@
   "description": "Tailor CMS Jodit HTML editor server component",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "exports": {
     ".": {
       "import": "./dist/index.js",
