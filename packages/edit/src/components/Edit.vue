@@ -2,12 +2,10 @@
   <div class="tce-jodit-html text-left">
     <ElementPlaceholder
       v-if="!isFocused && !content && showPlaceholder"
+      :icon="manifest.ui.icon"
       :is-disabled="isDisabled"
       :is-focused="isFocused"
       :name="`${manifest.name} component`"
-      active-icon="mdi-arrow-up"
-      active-placeholder="Use toolbar to upload the image"
-      icon="mdi-image-plus"
     />
     <template v-else>
       <JoditEditor v-if="isFocused" v-model="content" />

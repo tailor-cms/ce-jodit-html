@@ -134,6 +134,7 @@ $text-size: 16px;
   &:hover {
     &:not([disabled]) {
       background-color: transparent;
+
       @include colorize(
         $color: $icon-color,
         $background: rgba($icon-color, 0.08)
