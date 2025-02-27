@@ -77,18 +77,6 @@ $text-size: 16px;
 }
 
 .jodit-toolbar-editor-collection .jodit-toolbar-button {
-  .jodit-icon {
-    color: inherit !important;
-
-    .mdi {
-      color: $icon-color;
-    }
-
-    .mdi-color-helper {
-      color: inherit !important;
-    }
-  }
-
   @mixin colorize($color, $background: none) {
     background: $background;
     color: $color;
@@ -193,11 +181,7 @@ $text-size: 16px;
   }
 }
 
-.jodit-colorpicker > div {
-  margin-bottom: 8px;
-}
-
-.jodit-colorpicker .btn_reset_color {
+.jodit-color-picker .btn_reset_color {
   width: auto;
 
   &:active,
@@ -225,7 +209,7 @@ $text-size: 16px;
   }
 }
 
-.jodit-colorpicker .selected_color_marker {
+.jodit-color-picker .selected_color_marker {
   &::before {
     display: none;
   }

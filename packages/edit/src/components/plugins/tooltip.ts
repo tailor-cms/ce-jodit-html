@@ -47,11 +47,8 @@ export const formTemplate = (jodit: IJodit) => {
 };
 
 export class TooltipPlugin extends Plugin {
-  jodit: IJodit;
-
   constructor(jodit: IJodit) {
     super(jodit);
-    this.jodit = jodit;
     this.buttons = [{ name: TOOLTIP_CONTROL, group: 'insert' }];
   }
 
