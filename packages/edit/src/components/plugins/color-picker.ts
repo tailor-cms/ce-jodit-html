@@ -1,27 +1,16 @@
-import {
-  IControlType,
-  IJodit,
-  IToolbarButton,
-  Nullable,
-  // IToolbarButton,
-  // IUIElement,
-  // Nullable,
-} from 'jodit/types';
+import { IControlType, IJodit, Nullable } from 'jodit/types';
 import isString from 'lodash/isString';
 import { Jodit } from 'jodit';
 import { Plugin } from 'jodit/esm/modules';
 import { Table } from 'jodit/types/modules';
 
-const CSS_NO_COLOR = '';
 const JODIT_COLORPICKER = '.jodit-color-picker';
 const JODIT_COMMAND_BACKGROUND_COLOR = 'background';
 const JODIT_COMMAND_TEXT_COLOR = 'forecolor';
-// const JODIT_CONTROL_COLOR = 'brush';
-// const JODIT_DEFAULT_EVENT_NAMESPACE = 'JoditEventDefaultNamespace';
-const JODIT_PICKER_SELECTION_EVENTS = ['mousedown', 'touchend'];
+const JODIT_PICKER_SELECTION_EVENTS = 'mousedown touchend';
 
 function onSelect(events: any, target: any, listener: any) {
-  return events.on(target, JODIT_PICKER_SELECTION_EVENTS.join(' '), listener);
+  return events.on(target, JODIT_PICKER_SELECTION_EVENTS, listener);
 }
 
 function colorPopup(popup: HTMLElement, jodit: IJodit, close = () => {}) {
@@ -32,11 +21,11 @@ function colorPopup(popup: HTMLElement, jodit: IJodit, close = () => {}) {
 
   // Add reset color buttons to main toolbar's colorpicker/s.
   onSelect(events, addResetButton(pickers.textColor), () => {
-    jodit.execCommand(JODIT_COMMAND_TEXT_COLOR, false, CSS_NO_COLOR);
+    jodit.execCommand(JODIT_COMMAND_TEXT_COLOR, false, '');
     close();
   });
   onSelect(events, addResetButton(pickers.backgroundColor), () => {
-    jodit.execCommand(JODIT_COMMAND_BACKGROUND_COLOR, false, CSS_NO_COLOR);
+    jodit.execCommand(JODIT_COMMAND_BACKGROUND_COLOR, false, '');
     close();
   });
 
@@ -51,27 +40,24 @@ function inlineColorPopup(popup: HTMLElement, jodit: IJodit, table: Table) {
     const selected = picker.querySelector('.active');
     if (selected) changeSelectedMarker(selected);
 
-    const selectionEvents = JODIT_PICKER_SELECTION_EVENTS.join(' ');
-    jodit.events.on(picker, selectionEvents, (event, picker) => {
+    jodit.events.on(picker, JODIT_PICKER_SELECTION_EVENTS, (event, picker) => {
       onColorChange(event, picker);
     });
   });
   // Add reset color buttons to inline toolbar's colorpicker/s.
   onSelect(events, addResetButton(pickers.textColor), () => {
     const selectedCells = table.getAllSelectedCells();
-    selectedCells.forEach((cell) => (cell.style.color = CSS_NO_COLOR));
+    selectedCells.forEach((cell) => (cell.style.color = ''));
     jodit.setEditorValue();
   });
   onSelect(events, addResetButton(pickers.backgroundColor), () => {
     const selectedCells = table.getAllSelectedCells();
-    selectedCells.forEach(
-      (cell) => (cell.style.backgroundColor = CSS_NO_COLOR),
-    );
+    selectedCells.forEach((cell) => (cell.style.backgroundColor = ''));
     jodit.setEditorValue();
   });
   onSelect(events, addResetButton(pickers.borderColor), () => {
     const selectedCells = table.getAllSelectedCells();
-    selectedCells.forEach((cell) => (cell.style.borderColor = CSS_NO_COLOR));
+    selectedCells.forEach((cell) => (cell.style.borderColor = ''));
     jodit.setEditorValue();
   });
 
