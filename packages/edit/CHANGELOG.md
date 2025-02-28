@@ -1,5 +1,11 @@
 # @tailor-cms/ce-jodit-html-edit
 
+## 0.0.4
+
+### Patch Changes
+
+- Fixed color picker to match old functionality, fixed hmr.
+
 ## 0.0.3
 
 ### Patch Changes
