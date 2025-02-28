@@ -1,4 +1,4 @@
-import { IControlType, IJodit, IToolbarButton, Nullable } from 'jodit/types';
+import { IControlType, IJodit, IToolbarButton } from 'jodit/types';
 import isString from 'lodash/isString';
 import { Jodit } from 'jodit';
 import { Plugin } from 'jodit/esm/modules';

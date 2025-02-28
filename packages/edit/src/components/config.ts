@@ -1,5 +1,5 @@
+import { DeepPartial, IToolbarButton } from 'jodit/types';
 import { Config } from 'jodit/types/config';
-import { DeepPartial } from 'jodit/types';
 import { Jodit } from 'jodit';
 
 export const toolbarId = 'joditToolbar';
@@ -71,10 +71,28 @@ export const editorConfig: DeepPartial<Config> = {
         '"Times New Roman", Times, serif': 'Times New Roman',
         'Verdana, Geneva, sans-serif': 'Verdana',
       }),
+      update(_editor: Jodit, button: IToolbarButton) {
+        const value = button.state.value as string;
+        const list = button.control.list as Record<string, string>;
+        button.setState({ text: list[value] ?? 'Default' });
+      },
+      name: '',
+    },
+    fontsize: {
+      update(_editor: Jodit, button: IToolbarButton) {
+        button.setState({ text: button.state.value as string });
+      },
+      name: '',
     },
     paragraph: {
       list: { p: 'Normal' },
+      update(_editor: Jodit, button: IToolbarButton) {
+        const value = button.state.value as string;
+        const list = button.control.list as Record<string, string>;
+        button.setState({ text: list[value] ?? 'Normal' });
+      },
       tooltip: 'Style',
+      name: '',
     },
   },
 };
