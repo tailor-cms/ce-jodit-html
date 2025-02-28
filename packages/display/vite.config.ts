@@ -18,6 +18,9 @@ export default defineConfig({
       fileName: 'index',
       formats: ['es', 'cjs'],
     },
+    commonjsOptions: {
+      strictRequires: 'auto',
+    },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
