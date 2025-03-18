@@ -1,5 +1,11 @@
 # @tailor-cms/ce-jodit-html-display
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated edit frame background.
+
 ## 0.0.5
 
 ### Patch Changes
