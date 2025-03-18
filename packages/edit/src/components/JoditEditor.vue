@@ -64,6 +64,7 @@ onBeforeUnmount(() => editor.value?.destruct());
   flex-direction: column;
 
   .jodit-workplace {
+    background-color: transparent;
     border: none;
   }
 }
