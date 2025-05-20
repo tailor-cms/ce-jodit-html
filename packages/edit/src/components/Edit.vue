@@ -3,7 +3,7 @@
     <JoditEditor v-if="isFocused" v-model="content" />
     <div v-else class="jodit-container">
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <div v-if="content" class="jodit-wysiwyg" v-html="content"></div>
+      <div v-if="isEmpty" class="jodit-wysiwyg" v-html="content"></div>
       <div v-else class="jodit-wysiwyg jodit-placeholder">
         Enter your text...
       </div>
@@ -33,6 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits(['save']);
 
 const content = ref(props.element?.data?.content ?? '');
+const isEmpty = computed(() => !content.value.replace(/<[^>]*>/g, ''));
 const hasChanges = computed(() => {
   const previousValue = props.element?.data?.content ?? '';
   return previousValue !== content.value;
@@ -57,8 +58,7 @@ watch(
 
 <style lang="scss" scoped>
 $min-width: 11.25rem;
-$min-height: 8.75rem;
-$min-height-sm: 5.5rem;
+$min-height: 5rem;
 
 .jodit-container {
   min-width: $min-width;
@@ -79,7 +79,7 @@ $min-height-sm: 5.5rem;
 }
 
 :deep(.jodit-placeholder) {
-  font-style: italic;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 :deep(.tce-jodit-tooltip) {
