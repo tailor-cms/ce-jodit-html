@@ -36,7 +36,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@tailor-cms/core-components": "1.0.26",
     "jodit": "^4.5.17",
     "lodash": "^4.17.21"
   }

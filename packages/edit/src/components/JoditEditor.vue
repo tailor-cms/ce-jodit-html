@@ -69,10 +69,6 @@ onBeforeUnmount(() => editor.value?.destruct());
   }
 }
 
-:deep(.jodit-placeholder) {
-  font-style: italic;
-}
-
 :deep(.jodit-source) {
   background: transparent;
 }
