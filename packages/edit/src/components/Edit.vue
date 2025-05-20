@@ -1,19 +1,13 @@
 <template>
   <div class="tce-jodit-html text-left">
-    <ElementPlaceholder
-      v-if="!isFocused && !content && showPlaceholder"
-      :icon="manifest.ui.icon"
-      :is-disabled="isDisabled"
-      :is-focused="isFocused"
-      :name="`${manifest.name} component`"
-    />
-    <template v-else>
-      <JoditEditor v-if="isFocused" v-model="content" />
-      <div v-else class="jodit-container">
-        <!-- eslint-disable-next-line vue/no-v-html -->
-        <div class="jodit-wysiwyg" v-html="content"></div>
+    <JoditEditor v-if="isFocused" v-model="content" />
+    <div v-else class="jodit-container">
+      <!-- eslint-disable-next-line vue/no-v-html -->
+      <div v-if="!isEmpty" class="jodit-wysiwyg" v-html="content"></div>
+      <div v-else class="jodit-wysiwyg jodit-placeholder">
+        Enter your text...
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -21,8 +15,6 @@
 import { computed, defineProps, ref, watch } from 'vue';
 import debounce from 'lodash/debounce';
 import type { Element } from '@tailor-cms/ce-jodit-html-manifest';
-import { ElementPlaceholder } from '@tailor-cms/core-components';
-import manifest from '@tailor-cms/ce-jodit-html-manifest';
 
 import JoditEditor from './JoditEditor.vue';
 
@@ -31,18 +23,17 @@ interface Props {
   isFocused?: boolean;
   isDisabled?: boolean;
   isDragged?: boolean;
-  showPlaceholder?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   isFocused: false,
   isDisabled: false,
   isDragged: false,
-  showPlaceholder: true,
 });
 const emit = defineEmits(['save']);
 
 const content = ref(props.element?.data?.content ?? '');
+const isEmpty = computed(() => !content.value.replace(/<[^>]*>/g, ''));
 const hasChanges = computed(() => {
   const previousValue = props.element?.data?.content ?? '';
   return previousValue !== content.value;
@@ -67,8 +58,7 @@ watch(
 
 <style lang="scss" scoped>
 $min-width: 11.25rem;
-$min-height: 8.75rem;
-$min-height-sm: 5.5rem;
+$min-height: 5rem;
 
 .jodit-container {
   min-width: $min-width;
@@ -86,6 +76,10 @@ $min-height-sm: 5.5rem;
 :deep(.jodit-wysiwyg) {
   overflow: visible;
   overflow-wrap: break-word;
+}
+
+:deep(.jodit-placeholder) {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 :deep(.tce-jodit-tooltip) {

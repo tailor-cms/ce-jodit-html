@@ -60,17 +60,13 @@ onBeforeUnmount(() => editor.value?.destruct());
 :deep(.jodit-container):not(.jodit_inline) {
   display: flex;
   border: none;
-  min-height: 140px;
+  min-height: 5rem;
   flex-direction: column;
 
   .jodit-workplace {
     background-color: transparent;
     border: none;
   }
-}
-
-:deep(.jodit-placeholder) {
-  font-style: italic;
 }
 
 :deep(.jodit-source) {
