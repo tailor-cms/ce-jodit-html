@@ -3,7 +3,7 @@
     <JoditEditor v-if="isFocused" v-model="content" />
     <div v-else class="jodit-container">
       <!-- eslint-disable-next-line vue/no-v-html -->
-      <div v-if="isEmpty" class="jodit-wysiwyg" v-html="content"></div>
+      <div v-if="!isEmpty" class="jodit-wysiwyg" v-html="content"></div>
       <div v-else class="jodit-wysiwyg jodit-placeholder">
         Enter your text...
       </div>
