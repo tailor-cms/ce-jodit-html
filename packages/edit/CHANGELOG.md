@@ -1,5 +1,11 @@
 # @tailor-cms/ce-jodit-html-edit
 
+## 0.0.8
+
+### Patch Changes
+
+- Add editor min height.
+
 ## 0.0.7
 
 ### Patch Changes
