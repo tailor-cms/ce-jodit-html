@@ -1,5 +1,11 @@
 # @tailor-cms/ce-jodit-html-server
 
+## 0.0.7
+
+### Patch Changes
+
+- Bump tce-boot package and update accordingly.
+
 ## 0.0.6
 
 ### Patch Changes
