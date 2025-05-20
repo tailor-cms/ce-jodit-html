@@ -43,6 +43,7 @@ onMounted(() => {
       toolbarAdaptive: false,
       language: 'en',
       placeholder: 'Enter your text...',
+      minHeight: 80,
       showTooltipDelay: 350,
       colorPickerDefaultTab: 'color',
       disablePlugins: ['fullsize'],
