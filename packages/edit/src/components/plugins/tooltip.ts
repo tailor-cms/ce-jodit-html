@@ -1,6 +1,6 @@
 import { IJodit, Nullable } from 'jodit/esm/types';
 import { UIBlock, UIForm, UIInput } from 'jodit/esm/core/ui/form';
-import isFunction from 'lodash/isFunction';
+import { isFunction } from 'lodash-es';
 import { Jodit } from 'jodit';
 import { Plugin } from 'jodit/esm/modules';
 import { UIButton } from 'jodit/esm/core/ui/button';

@@ -13,7 +13,7 @@
 
 <script lang="ts" setup>
 import { computed, defineProps, ref, watch } from 'vue';
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash-es';
 import type { Element } from '@tailor-cms/ce-jodit-html-manifest';
 
 import JoditEditor from './JoditEditor.vue';
