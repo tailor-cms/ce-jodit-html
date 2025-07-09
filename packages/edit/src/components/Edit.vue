@@ -20,15 +20,15 @@ import JoditEditor from './JoditEditor.vue';
 
 interface Props {
   element: Element;
-  isFocused?: boolean;
-  isDisabled?: boolean;
   isDragged?: boolean;
+  isFocused?: boolean;
+  isReadonly?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  isFocused: false,
-  isDisabled: false,
   isDragged: false,
+  isFocused: false,
+  isReadonly: false,
 });
 const emit = defineEmits(['save']);
 

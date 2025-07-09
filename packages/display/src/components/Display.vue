@@ -1,14 +1,14 @@
 <template>
   <div class="ce-jodit-html-root">
     <!-- eslint-disable-next-line -->
-    <span v-html="data.content" />
+    <span v-html="element.data.content" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ElementData } from '@tailor-cms/ce-jodit-html-manifest';
+import { Element } from '@tailor-cms/ce-jodit-html-manifest';
 
-defineProps<{ id: number; data: ElementData }>();
+defineProps<{ element: Element }>();
 </script>
 
 <style scoped lang="scss">
