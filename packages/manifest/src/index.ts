@@ -44,7 +44,8 @@ export const ai = {
     Generate rich text for a page as an object with the following
     properties: { "content": "" }
     where:
-    - 'content' is the text of the page in HTML format.
+    - 'content' is the text of the page in HTML format. Include only the text
+      content, without the full HTML page structure.
   `,
   processResponse: (val: any) => val,
 };
