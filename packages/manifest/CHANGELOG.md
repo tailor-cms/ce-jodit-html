@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- git commit -m "Bump version"
+- Migrates package to the latest tce-boot version, adds AI config and devcontainers. Updates dependencies to the latest versions.
 
 ## 0.0.8
 
