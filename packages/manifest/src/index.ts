@@ -1,4 +1,5 @@
 import { OpenAISchema } from '@tailor-cms/cek-common';
+
 import type {
   DataInitializer,
   ElementData,
