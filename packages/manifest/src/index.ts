@@ -1,3 +1,5 @@
+import { OpenAISchema } from '@tailor-cms/cek-common';
+
 import type {
   DataInitializer,
   ElementData,
@@ -26,6 +28,29 @@ const ui = {
   forceFullWidth: false,
 };
 
+export const ai = {
+  Schema: {
+    type: 'json_schema',
+    name: 'ce_jodit_html',
+    schema: {
+      type: 'object',
+      properties: {
+        content: { type: 'string' },
+      },
+      required: ['content'],
+      additionalProperties: false,
+    },
+  } as OpenAISchema,
+  getPrompt: () => `
+    Generate rich text for a page as an object with the following
+    properties: { "content": "" }
+    where:
+    - 'content' is the text of the page in HTML format. Include only the text
+      content, without the full HTML page structure.
+  `,
+  processResponse: (val: any) => val,
+};
+
 const manifest: ElementManifest = {
   type,
   version,
@@ -33,6 +58,7 @@ const manifest: ElementManifest = {
   ssr: false,
   initState,
   ui,
+  ai,
 };
 
 export default manifest;

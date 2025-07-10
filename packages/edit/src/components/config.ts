@@ -1,5 +1,5 @@
 import { Config } from 'jodit/types/config';
-import { DeepPartial } from 'jodit/types';
+import { DeepPartial } from 'jodit/types/types';
 import { Jodit } from 'jodit';
 
 export const toolbarId = 'joditToolbar';

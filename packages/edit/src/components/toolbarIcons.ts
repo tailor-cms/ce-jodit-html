@@ -1,5 +1,5 @@
 import { Jodit } from 'jodit';
-import map from 'lodash/map';
+import { map } from 'lodash-es';
 
 const mdiIcons = {
   source: 'code-tags',
