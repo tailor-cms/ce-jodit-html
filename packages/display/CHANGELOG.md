@@ -1,5 +1,11 @@
 # @tailor-cms/ce-jodit-html-display
 
+## 0.1.0
+
+### Minor Changes
+
+- git commit -m "Bump version"
+
 ## 0.0.8
 
 ### Patch Changes
