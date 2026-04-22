@@ -41,7 +41,6 @@ test.describe('Renders pre-seeded content', () => {
     await expect(edit.wysiwyg.locator('strong')).toHaveText('Hello');
     await expect(edit.wysiwyg.locator('em')).toHaveText('world');
   });
-
 });
 
 test.describe('Toolbar config', () => {
