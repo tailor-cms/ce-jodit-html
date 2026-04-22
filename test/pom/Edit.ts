@@ -18,28 +18,36 @@ export class Edit extends pom.EditPanel {
   readonly clearFormattingBtn: Locator;
   readonly outdentBtn: Locator;
   readonly indentBtn: Locator;
+  readonly selectAllBtn: Locator;
 
   constructor(page: Page) {
     super(page);
     this.wysiwyg = this.editor.locator('.jodit-wysiwyg');
     this.placeholder = this.editor.locator('.jodit-placeholder');
-    const tb = this.topToolbar;
-    this.boldBtn = tb.locator('.jodit-toolbar-button_bold button');
-    this.italicBtn = tb.locator('.jodit-toolbar-button_italic button');
-    this.underlineBtn = tb.locator('.jodit-toolbar-button_underline button');
-    this.strikeBtn = tb.locator('.jodit-toolbar-button_strikethrough button');
-    this.undoBtn = tb.locator('.jodit-toolbar-button_undo button');
-    this.redoBtn = tb.locator('.jodit-toolbar-button_redo button');
-    this.orderedListBtn = tb.locator('.jodit-toolbar-button_ol button');
-    this.bulletListBtn = tb.locator('.jodit-toolbar-button_ul button');
-    this.superscriptBtn = tb.locator(
-      '.jodit-toolbar-button_superscript button',
-    );
-    this.subscriptBtn = tb.locator('.jodit-toolbar-button_subscript button');
-    this.horizontalRuleBtn = tb.locator('.jodit-toolbar-button_hr button');
-    this.clearFormattingBtn = tb.locator('.jodit-toolbar-button_eraser button');
-    this.outdentBtn = tb.locator('.jodit-toolbar-button_outdent button');
-    this.indentBtn = tb.locator('.jodit-toolbar-button_indent button');
+    const toolbar = this.topToolbar;
+    this.boldBtn = toolbar.getByRole('button', { name: 'Bold' });
+    this.italicBtn = toolbar.getByRole('button', { name: 'Italic' });
+    this.underlineBtn = toolbar.getByRole('button', { name: 'Underline' });
+    this.strikeBtn = toolbar.getByRole('button', { name: 'Strike through' });
+    this.undoBtn = toolbar.getByRole('button', { name: 'Undo' });
+    this.redoBtn = toolbar.getByRole('button', { name: 'Redo' });
+    this.orderedListBtn = toolbar.getByRole('button', {
+      name: 'Insert Ordered List',
+    });
+    this.bulletListBtn = toolbar.getByRole('button', {
+      name: 'Insert Unordered List',
+    });
+    this.superscriptBtn = toolbar.getByRole('button', { name: 'Superscript' });
+    this.subscriptBtn = toolbar.getByRole('button', { name: 'Subscript' });
+    this.horizontalRuleBtn = toolbar.getByRole('button', {
+      name: 'Insert Horizontal Line',
+    });
+    this.clearFormattingBtn = toolbar.getByRole('button', {
+      name: 'Clear Formatting',
+    });
+    this.outdentBtn = toolbar.getByRole('button', { name: 'Decrease Indent' });
+    this.indentBtn = toolbar.getByRole('button', { name: 'Increase Indent' });
+    this.selectAllBtn = this.editor.getByRole('button', { name: 'Select all' });
   }
 
   get allToolbarButtons(): Locator[] {
@@ -67,7 +75,6 @@ export class Edit extends pom.EditPanel {
   }
 
   async selectAll() {
-    await this.wysiwyg.focus();
-    await this.wysiwyg.press('ControlOrMeta+a');
+    await this.selectAllBtn.click();
   }
 }

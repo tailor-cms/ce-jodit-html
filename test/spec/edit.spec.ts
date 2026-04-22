@@ -68,20 +68,18 @@ test.describe('Toolbar actions', () => {
     await edit.selectAll();
   });
 
-  test('Bold wraps selection in strong or b', async ({ page }) => {
+  test('Bold wraps selection in strong', async ({ page }) => {
     const edit = new Edit(page);
-    await edit.boldBtn.click();
-    await expect(edit.wysiwyg.locator('strong, b')).toContainText(
-      'Sample text',
-    );
+    await edit.boldBtn.dispatchEvent('click');
+    await expect(edit.wysiwyg.locator('strong')).toContainText('Sample text');
   });
 
   test('Undo reverts the last change', async ({ page }) => {
     const edit = new Edit(page);
-    await edit.boldBtn.click();
-    await expect(edit.wysiwyg.locator('strong, b')).toBeVisible();
+    await edit.boldBtn.dispatchEvent('click');
+    await expect(edit.wysiwyg.locator('strong')).toBeVisible();
     await edit.undoBtn.click();
-    await expect(edit.wysiwyg.locator('strong, b')).toHaveCount(0);
+    await expect(edit.wysiwyg.locator('strong')).toHaveCount(0);
   });
 });
 

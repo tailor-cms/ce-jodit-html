@@ -83,13 +83,13 @@ test.describe('Content rendering', () => {
 
   test('Renders links with href', async ({ page }) => {
     await elementClient.update(ELEMENT_ID, {
-      content: '<p><a href="https://tailor-cms.org">Tailor</a></p>',
+      content: '<p><a href="https://tailor-cms.com">Tailor</a></p>',
     });
     await page.reload({ waitUntil: 'networkidle' });
     const display = new Display(page);
     const link = display.content.locator('a');
     await expect(link).toHaveText('Tailor');
-    await expect(link).toHaveAttribute('href', 'https://tailor-cms.org');
+    await expect(link).toHaveAttribute('href', 'https://tailor-cms.com');
   });
 
   test('Renders tables', async ({ page }) => {
