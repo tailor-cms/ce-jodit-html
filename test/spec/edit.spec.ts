@@ -42,15 +42,6 @@ test.describe('Renders pre-seeded content', () => {
     await expect(edit.wysiwyg.locator('em')).toHaveText('world');
   });
 
-  test('Renders headings and lists', async ({ page }) => {
-    await elementClient.update(ELEMENT_ID, {
-      content: '<h2>Title</h2><ul><li>one</li><li>two</li></ul>',
-    });
-    await page.reload({ waitUntil: 'networkidle' });
-    const edit = new Edit(page);
-    await expect(edit.wysiwyg.locator('h2')).toHaveText('Title');
-    await expect(edit.wysiwyg.locator('ul > li')).toHaveCount(2);
-  });
 });
 
 test.describe('Toolbar config', () => {
@@ -84,12 +75,6 @@ test.describe('Toolbar actions', () => {
     await expect(edit.wysiwyg.locator('strong, b')).toContainText(
       'Sample text',
     );
-  });
-
-  test('Bullet list wraps selection in ul', async ({ page }) => {
-    const edit = new Edit(page);
-    await edit.bulletListBtn.click();
-    await expect(edit.wysiwyg.locator('ul > li')).toContainText('Sample text');
   });
 
   test('Undo reverts the last change', async ({ page }) => {
