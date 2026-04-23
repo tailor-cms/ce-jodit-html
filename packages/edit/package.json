@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@tailor-cms/ce-jodit-html-manifest": "workspace:*",
-    "@tailor-cms/eslint-config": "2.0.0-beta.13",
+    "@tailor-cms/eslint-config": "2.0.0-beta.14",
     "@types/lodash-es": "^4.17.12",
     "@vitejs/plugin-vue": "^6.0.6",
     "typescript": "^6.0.3",
@@ -39,7 +39,7 @@
     "vuetify": "^4.0.6"
   },
   "dependencies": {
-    "@tailor-cms/cek-common": "2.0.0-beta.13",
+    "@tailor-cms/cek-common": "2.0.0-beta.14",
     "jodit": "^4.12.2",
     "lodash-es": "^4.18.1"
   },

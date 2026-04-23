@@ -26,10 +26,10 @@
   },
   "dependencies": {
     "@tailor-cms/ce-jodit-html-manifest": "workspace:*",
-    "@tailor-cms/cek-common": "2.0.0-beta.13"
+    "@tailor-cms/cek-common": "2.0.0-beta.14"
   },
   "devDependencies": {
-    "@tailor-cms/eslint-config": "2.0.0-beta.13",
+    "@tailor-cms/eslint-config": "2.0.0-beta.14",
     "tsdown": "^0.21.9",
     "typescript": "^6.0.3"
   },
