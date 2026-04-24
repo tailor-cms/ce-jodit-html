@@ -82,7 +82,3 @@ test.describe('Toolbar actions', () => {
     await expect(edit.wysiwyg.locator('strong')).toHaveCount(0);
   });
 });
-
-test.afterAll(async () => {
-  await elementClient.reset(ELEMENT_ID);
-});

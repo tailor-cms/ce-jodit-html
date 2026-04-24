@@ -7,6 +7,7 @@ const ELEMENT_ID = 'test-jodit-html-display';
 
 test.beforeEach(async ({ page }) => {
   await elementClient.reset(ELEMENT_ID);
+  await elementClient.resetState(ELEMENT_ID);
   await page.goto(`/?id=${ELEMENT_ID}`);
   await page.waitForLoadState('networkidle');
 });
@@ -140,8 +141,4 @@ test.describe('Content rendering', () => {
     await expect(span).toHaveText('term');
     await expect(span).toHaveAttribute('data-tooltip', 'note');
   });
-});
-
-test.afterAll(async () => {
-  await elementClient.reset(ELEMENT_ID);
 });
