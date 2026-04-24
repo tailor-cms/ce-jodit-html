@@ -3,7 +3,6 @@
   "description": "Tailor CMS Jodit HTML editor",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "type": "module",
-  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "pnpm boot:cek",
