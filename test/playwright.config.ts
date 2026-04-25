@@ -10,7 +10,7 @@ if (!process.env.PREVIEW_RUNTIME_URL)
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: '.',
+  testDir: './spec',
   outputDir: './out',
   fullyParallel: false,
   forbidOnly: !!process.env.CI,

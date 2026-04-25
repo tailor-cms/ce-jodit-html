@@ -12,9 +12,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
+import type { Element, ElementData } from '@tailor-cms/ce-jodit-html-manifest';
 import { debounce } from 'lodash-es';
-import type { Element } from '@tailor-cms/ce-jodit-html-manifest';
 
 import JoditEditor from './JoditEditor.vue';
 
@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
   isFocused: false,
   isReadonly: false,
 });
-const emit = defineEmits(['save']);
+const emit = defineEmits<{ save: [data: ElementData] }>();
 
 const content = ref(props.element?.data?.content ?? '');
 const isEmpty = computed(() => !content.value.replace(/<[^>]*>/g, ''));
@@ -135,7 +135,7 @@ $min-height: 5rem;
 
 :deep(.jodit-container):not(.jodit-inline) {
   min-height: $min-height !important;
-  background: transparent !important;
+  background: transparent;
   font-size: 1rem;
   border: none;
 }
