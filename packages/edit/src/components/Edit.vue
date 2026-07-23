@@ -46,6 +46,14 @@ const save = () => {
 };
 
 watch(
+  () => props.element?.data?.content,
+  (value = '') => {
+    if (value === content.value) return;
+    content.value = value;
+  },
+);
+
+watch(
   () => props.isFocused,
   (val) => !val && save(),
 );
