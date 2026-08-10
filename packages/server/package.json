@@ -3,7 +3,7 @@
   "description": "Tailor CMS Jodit HTML editor server component",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
   "type": "module",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
@@ -26,11 +26,11 @@
   },
   "dependencies": {
     "@tailor-cms/ce-jodit-html-manifest": "workspace:*",
-    "@tailor-cms/cek-common": "2.0.1"
+    "@tailor-cms/cek-common": "2.0.3"
   },
   "devDependencies": {
-    "@tailor-cms/eslint-config": "2.0.1",
-    "tsdown": "^0.21.10",
+    "@tailor-cms/eslint-config": "2.0.3",
+    "tsdown": "^0.22.14",
     "typescript": "^6.0.3"
   },
   "tsdown": {
@@ -44,6 +44,6 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=24"
+    "node": ">=26"
   }
 }
