@@ -1,13 +1,13 @@
-# @tailor-cms/ce-jodit-html-edit
+# @tailor-cms/ce-jodit-html-server
 
-Authoring component for the **Jodit HTML** content element in [Tailor CMS](https://github.com/tailor-cms/author).
+Server-side module for the **Jodit HTML** content element in [Tailor CMS](https://github.com/tailor-cms/author).
 
-Renders the element inside the Tailor authoring interface, where content is created and edited.
+Provides the server half of the element: state initialisation, lifecycle hooks and any AI configuration, registered by the Tailor server runtime.
 
 ## Installation
 
 ```sh
-npm install @tailor-cms/ce-jodit-html-edit
+npm install @tailor-cms/ce-jodit-html-server
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ registry rather than imported directly, but the package can be consumed on its
 own:
 
 ```ts
-import { Edit } from '@tailor-cms/ce-jodit-html-edit';
+import serverModule from '@tailor-cms/ce-jodit-html-server';
 ```
 
 ## Element

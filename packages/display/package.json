@@ -2,6 +2,13 @@
   "name": "@tailor-cms/ce-jodit-html-display",
   "description": "Tailor CMS Jodit HTML editor end-user component",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tailor-cms/ce-jodit-html.git",
+    "directory": "packages/display"
+  },
+  "homepage": "https://github.com/tailor-cms/ce-jodit-html#readme",
+  "bugs": "https://github.com/tailor-cms/ce-jodit-html/issues",
   "type": "module",
   "version": "2.0.3",
   "exports": {
