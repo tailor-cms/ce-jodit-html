@@ -2,6 +2,7 @@
   "name": "@tailor-cms/ce-jodit-html",
   "description": "Tailor CMS Jodit HTML editor",
   "author": "Studion <info@gostudion.com> (https://github.com/tailor-cms)",
+  "license": "MIT",
   "type": "module",
   "private": true,
   "scripts": {
