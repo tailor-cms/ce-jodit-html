@@ -11,7 +11,7 @@
   "homepage": "https://github.com/tailor-cms/ce-jodit-html#readme",
   "bugs": "https://github.com/tailor-cms/ce-jodit-html/issues",
   "type": "module",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
@@ -34,10 +34,10 @@
   },
   "dependencies": {
     "@tailor-cms/ce-jodit-html-manifest": "workspace:*",
-    "@tailor-cms/cek-common": "2.0.3"
+    "@tailor-cms/cek-common": "2.1.0"
   },
   "devDependencies": {
-    "@tailor-cms/eslint-config": "2.0.3",
+    "@tailor-cms/eslint-config": "2.1.0",
     "tsdown": "^0.22.14",
     "typescript": "^6.0.3"
   },
