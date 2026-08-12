@@ -1,5 +1,11 @@
 # @tailor-cms/ce-jodit-html-manifest
 
+## 2.1.0
+
+### Minor Changes
+
+- Migrate to the latest CEK version.
+
 ## 2.0.2
 
 ### Patch Changes

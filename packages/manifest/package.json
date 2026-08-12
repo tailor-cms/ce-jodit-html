@@ -11,7 +11,7 @@
   "homepage": "https://github.com/tailor-cms/ce-jodit-html#readme",
   "bugs": "https://github.com/tailor-cms/ce-jodit-html/issues",
   "type": "module",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
