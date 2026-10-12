@@ -14,10 +14,6 @@ $icon-accent-color: #607d8b;
 $icon-size: 24px;
 $text-size: 16px;
 
-.jodit-toolbar-editor-collection_container {
-  min-height: 72px;
-}
-
 #joditToolbar {
   width: unset !important;
 }
