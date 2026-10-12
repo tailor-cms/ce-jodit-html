@@ -87,7 +87,7 @@ $min-height: 5rem;
 }
 
 :deep(.jodit-placeholder) {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(var(--v-theme-on-surface), 0.5);
 }
 
 :deep(.tce-jodit-tooltip) {

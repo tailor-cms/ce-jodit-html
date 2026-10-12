@@ -1,5 +1,11 @@
 # @tailor-cms/ce-jodit-html-server
 
+## 3.0.1
+
+### Patch Changes
+
+- @tailor-cms/ce-jodit-html-manifest@3.0.1
+
 ## 3.0.0
 
 ### Major Changes

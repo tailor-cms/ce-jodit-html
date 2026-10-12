@@ -9,10 +9,15 @@ import { toolbarId } from './config.ts';
 <style scoped></style>
 
 <style lang="scss">
-$icon-color: #333;
-$icon-accent-color: #607d8b;
-$icon-size: 24px;
-$text-size: 16px;
+// Theme colors and state overlays match Vuetify text buttons (TipTap toolbar)
+$icon-color: rgb(var(--v-theme-on-surface));
+$hover-background: rgba(var(--v-theme-on-surface), var(--v-hover-opacity));
+$active-background: rgba(var(--v-theme-on-surface), var(--v-activated-opacity));
+// Matches the TipTap (ce-html) toolbar: 30px buttons with 20px icons
+$icon-size: 20px;
+$text-size: 14px;
+$button-size: 30px;
+$button-radius: 6px;
 
 #joditToolbar {
   width: unset !important;
@@ -29,8 +34,18 @@ $text-size: 16px;
   text-align: initial;
 
   .jodit-ui-group {
+    .jodit-ui-separator {
+      align-self: stretch;
+      width: 1px;
+      margin: 0.25rem 0.125rem 0.25rem 0.25rem;
+      border: none;
+      background: rgba(var(--v-border-color), var(--v-border-opacity));
+    }
+
     .jodit-toolbar-button {
-      min-width: 30px;
+      height: $button-size;
+      min-width: $button-size;
+      border: none;
       line-height: normal;
 
       &:focus {
@@ -38,8 +53,8 @@ $text-size: 16px;
       }
 
       button {
-        height: 2rem;
-        min-width: 2rem;
+        height: 100%;
+        min-width: $button-size;
       }
 
       .jodit-toolbar-button__text {
@@ -104,11 +119,19 @@ $text-size: 16px;
     all 0.2s linear,
     opacity 0.1s linear;
 
+  // Dropdowns: icon + compact chevron, ~42px wide like the TipTap toolbar
   &_with-trigger_true {
     border: none;
-    padding: 0 5px;
+    padding: 0 2px;
+
+    & > button {
+      min-width: 24px !important;
+      padding: 0 2px;
+    }
 
     .jodit-toolbar-button__trigger {
+      width: 14px;
+      margin: 0;
       opacity: 1;
       background: none;
 
@@ -120,10 +143,7 @@ $text-size: 16px;
 
   &:active {
     &:not([disabled]) {
-      @include colorize(
-        $color: $icon-accent-color,
-        $background: rgba($icon-accent-color, 0.12)
-      );
+      @include colorize($color: $icon-color, $background: $active-background);
     }
   }
 
@@ -131,25 +151,19 @@ $text-size: 16px;
     &:not([disabled]) {
       background-color: transparent;
 
-      @include colorize(
-        $color: $icon-color,
-        $background: rgba($icon-color, 0.08)
-      );
+      @include colorize($color: $icon-color, $background: $hover-background);
     }
   }
 
   &[aria-pressed='true'] {
     &:not([disabled]) {
-      @include colorize(
-        $color: $icon-accent-color,
-        $background: rgba($icon-accent-color, 0.12)
-      );
+      @include colorize($color: $icon-color, $background: $active-background);
     }
   }
 
   &.popup_open,
   &.popup_open:hover {
-    @include colorize($color: #c3c3c3);
+    @include colorize($color: $icon-color, $background: $active-background);
   }
 
   &.jodit-toolbar-button-separator {
@@ -175,9 +189,10 @@ $text-size: 16px;
   &,
   & .jodit-toolbar-editor-collection {
     box-shadow: rgb(0 0 0 / 20%) 0 2px 8px;
-    border: 1px solid #ccc;
+    border: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
     padding: 0 !important;
-    background: #fff;
+    background: rgb(var(--v-theme-surface));
+    color: $icon-color;
   }
 
   .jodit-toolbar-button > button {
@@ -194,8 +209,8 @@ $text-size: 16px;
 
   &:active,
   &:hover {
-    background: none;
-    color: $icon-accent-color;
+    background: $hover-background;
+    color: $icon-color;
   }
 
   span {
@@ -232,6 +247,12 @@ $text-size: 16px;
 }
 
 .jodit-toolbar-button {
-  border-radius: 8px !important;
+  border-radius: $button-radius !important;
+}
+
+// Matches the Vuetify tooltip used by the TipTap toolbar
+.jodit-ui-tooltip {
+  background-color: rgb(var(--v-theme-surface-variant));
+  color: rgb(var(--v-theme-on-surface-variant));
 }
 </style>

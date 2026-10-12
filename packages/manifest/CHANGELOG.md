@@ -1,5 +1,9 @@
 # @tailor-cms/ce-jodit-html-manifest
 
+## 3.0.1
+
+No changes in this release.
+
 ## 3.0.0
 
 ### Major Changes

@@ -1,5 +1,11 @@
 # @tailor-cms/ce-jodit-html-edit
 
+## 3.0.1
+
+### Patch Changes
+
+- Match the toolbar to the TipTap HTML editor: button, icon and separator sizing, and Vuetify theme colors for icons, hover/active states, menus, tooltips and the placeholder
+
 ## 3.0.0
 
 ### Major Changes
