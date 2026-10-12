@@ -33,18 +33,18 @@
   },
   "devDependencies": {
     "@tailor-cms/ce-jodit-html-manifest": "workspace:*",
-    "@tailor-cms/eslint-config": "2.3.1",
+    "@tailor-cms/eslint-config": "3.0.0",
     "@types/lodash-es": "^4.17.12",
-    "@vitejs/plugin-vue": "^6.0.9",
+    "@vitejs/plugin-vue": "^6.0.10",
     "typescript": "^6.0.3",
-    "vite": "^8.3.3",
+    "vite": "^8.3.4",
     "vite-plugin-lib-inject-css": "^2.2.2",
-    "vue-tsc": "^3.3.12",
+    "vue-tsc": "^3.3.13",
     "vuetify": "^4.2.4"
   },
   "dependencies": {
-    "@tailor-cms/cek-common": "2.3.1",
-    "jodit": "^4.17.2",
+    "@tailor-cms/cek-common": "3.0.0",
+    "jodit": "^4.17.3",
     "lodash-es": "^4.18.1"
   },
   "publishConfig": {
